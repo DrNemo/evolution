@@ -2,7 +2,6 @@
 <html lang="ru">
     <head>
         <title>Simulated Evolution</title>
-        <script src="http://code.jquery.com/jquery-2.1.3.min.js" type="text/javascript"></script>
         <script src="draw.js" type="text/javascript"></script>
         <script src="evo.js" type="text/javascript"></script>
         <style type="text/css">
