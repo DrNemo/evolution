@@ -68,20 +68,20 @@ function Evolution(size, start_count_microbe){
 			var microbe = this.microbes[i];
 			// микроб умирает
 			if(microbe.energy < 0) {
-        		delete this.microbes[i];
-        		this.microbe_num --;
-        		continue;
-      		}
+				delete this.microbes[i];
+				this.microbe_num --;
+				continue;
+			}
 
-      		// перемещаем микроба на новую позицию
-      		microbe.point.move(microbe.getDirection(), this.size);
+			// перемещаем микроба на новую позицию
+			microbe.point.move(microbe.getDirection(), this.size);
 
-      		// проверяем наличее и съедаем еду
-      		if(this.isFood(microbe.point) && microbe.eatFood()){
-      			this.removeFood(microbe.point);
-      		}
+			// проверяем наличее и съедаем еду
+			if(this.isFood(microbe.point) && microbe.eatFood()){
+				this.removeFood(microbe.point);
+			}
 
-      		// рождаем нового микроба
+			// рождаем нового микроба
 			if(microbe.energy > menergy_reproduce){
 				this.createParentMicrobe(microbe);
 			}
@@ -160,29 +160,29 @@ function Microbe(point, energy){
 
 	this.genes = [];
 
-    this.randomGenes = function(){
-    	var genes = new Float64Array(8);
-      	for (var i = 0; i < genes.length; i++) {
-		    genes[i] = Math.random();
-      	}
-      	this.normalizeGenes(genes);
-    }
+	this.randomGenes = function(){
+		var genes = new Float64Array(8);
+		for (var i = 0; i < genes.length; i++) {
+			genes[i] = Math.random();
+		}
+		this.normalizeGenes(genes);
+	}
 
-    this.mutateGenes = function(genes){
-    	var clone_genes = new Float64Array(genes);
-    	var mutate_gen = Math.floor(Math.random() * clone_genes.length); // мутация случайного гена
+	this.mutateGenes = function(genes){
+		var clone_genes = new Float64Array(genes);
+		var mutate_gen = Math.floor(Math.random() * clone_genes.length); // мутация случайного гена
 
-    	clone_genes[mutate_gen] += (Math.random() - 0.5); // сама мутация
-    	if(clone_genes[mutate_gen] < 0){ // ген не может быть отрицательным
-    		clone_genes[mutate_gen] = 0;
-    	}
+		clone_genes[mutate_gen] += (Math.random() - 0.5); // сама мутация
+		if(clone_genes[mutate_gen] < 0){ // ген не может быть отрицательным
+			clone_genes[mutate_gen] = 0;
+		}
 
-    	this.normalizeGenes(clone_genes);
-    }
+		this.normalizeGenes(clone_genes);
+	}
 
-    this.normalizeGenes = function(genes){
-    	// нормализация генов
-    	var sum = 0;
+	this.normalizeGenes = function(genes){
+		// нормализация генов
+		var sum = 0;
 		for (var i = 0; i < genes.length; i++) {
 			sum += genes[i]; 
 		}
@@ -192,25 +192,25 @@ function Microbe(point, energy){
 		}
 
 		this.genes = genes;
-    }
+	}
 
-    this.getDirection = function(){
-    	return direction_set[this.direction];
-    }
+	this.getDirection = function(){
+		return direction_set[this.direction];
+	}
 
-    this.eatFood = function(){
-    	if(this.energy < energy_max){
-    		this.energy += eat_food_energy;
-    		return true;
-    	}
-    	return false;
-    }
+	this.eatFood = function(){
+		if(this.energy < energy_max){
+			this.energy += eat_food_energy;
+			return true;
+		}
+		return false;
+	}
 
-    this.live = function(){
-    	this.age += 1;
-    	this.energy -= 1;
+	this.live = function(){
+		this.age += 1;
+		this.energy -= 1;
 
-    	var len_genes = this.genes.length;
+		var len_genes = this.genes.length;
 		var rnd = Math.random();
 		var energy_for_dir_change = 0;
 		var sum = 0;
@@ -225,7 +225,7 @@ function Microbe(point, energy){
 		}
 
 		this.energy -= steering_cost[energy_for_dir_change];
-    }
+	}
 }
 
 function Point(x, y){
